@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'file://' + new File(System.getProperty('user.home'),'LocalRepository').absolutePath)
+            pom.version = '1.0.1'
+            pom.artifactId = 'data'
+            pom.groupId='com.emedinaa.peruvianrecipes.modules.core'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+
+    //retrofit 2
+    //https://github.com/square/retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit2"
+
+    //gson
+    //https://github.com/google/gson
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit2"
+
+    //okhttp3 interceptor
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3"
+
+    compile "com.emedinaa.peruvianrecipes.modules.core:domain:1.0.1"
+
+    testCompile 'junit:junit:4.12'
+}

@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'file://' + new File(System.getProperty('user.home'),'LocalRepository').absolutePath)
+            pom.version = '1.0.1'
+            pom.artifactId = 'domain'
+            pom.groupId='com.emedinaa.peruvianrecipes.modules.core'
+        }
+    }
+}

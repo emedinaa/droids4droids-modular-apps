@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'file://' + new File(System.getProperty('user.home'),'LocalRepository').absolutePath)
+            pom.version = '1.0.1'
+            pom.artifactId = 'common'
+            pom.groupId='com.emedinaa.peruvianrecipes.modules.core'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    //PICASSO
+    //http://square.github.io/picasso/
+    compile "com.squareup.picasso:picasso:$rootProject.picasso"
+
+    //GLIDE
+    //https://github.com/bumptech/glide
+    compile "com.github.bumptech.glide:glide:$rootProject.glide"
+
+    testCompile 'junit:junit:4.12'
+}

@@ -1,0 +1,10 @@
+./gradlew cleanBuildCache
+
+./gradlew :domain:uploadArchives
+./gradlew :data:uploadArchives
+
+./gradlew :module-recipes:uploadArchives
+./gradlew :module-user:uploadArchives
+./gradlew :module-search:uploadArchives
+
+./gradlew :module-user:uploadArchives

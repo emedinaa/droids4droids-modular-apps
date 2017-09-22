@@ -1,0 +1,1 @@
+include ':app', ':module-user', ':module-recipes', ':module-search'
